@@ -1,0 +1,67 @@
+html, body {
+    background-color: white;
+}
+#game_window {
+    width: 1024px;
+    height: 620px;
+    background-color: gray;
+}
+#platform {
+    float: left;
+    margin: 13px;
+    width: 595px;
+    height: 595px;
+    background-color: black;
+}
+.map_block {
+    height: 85px;
+    width: 85px;
+    float: left;
+}
+#right_space {
+    float: right;
+    margin-top: 13px;
+    margin-right: 13px;
+    width: 380px;
+    background-color: white;
+}
+#menu {
+    width: 378px;
+    height: 25px;
+    border: 1px;
+    border-style: solid;
+    background-color: rgb(158, 155, 155);
+}
+#restart_game {
+    float: right;
+}
+#energy {
+    float: right;
+    width: 380px;
+    height: 36px;
+    background-color: blue;
+}
+#ship_progress {
+    float: right;
+    width: 380px;
+    height: 200px;
+    background-color: white;
+}
+#text_field {
+    float: right;
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 364px;
+    height: 300px;
+    background-color: yellow;
+}
+#text_commands {
+    float: left;
+}
+#send_command {
+    float: right;
+    width: 62px;
+}
+.hidden {
+    display: none;
+}

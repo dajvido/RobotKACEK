@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-cookie-master/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/textprocessor.js"></script>
+    <script type="text/javascript" src="js/text_handler.js"></script>
+</head>
+<body>
+    <div id="hidden_platform" class="hidden">
+        <div id="AL" class="map_block hidden"></div>
+        <div id="BL" class="map_block hidden"></div>
+        <div id="CL" class="map_block hidden"></div>
+        <div id="DL" class="map_block hidden"></div>
+        <div id="EL" class="map_block hidden"></div>
+        <div id="FL" class="map_block hidden"></div>
+        <div id="GL" class="map_block hidden"></div>
+
+        <div id="AR" class="map_block hidden"></div>
+        <div id="BR" class="map_block hidden"></div>
+        <div id="CR" class="map_block hidden"></div>
+        <div id="DR" class="map_block hidden"></div>
+        <div id="ER" class="map_block hidden"></div>
+        <div id="FR" class="map_block hidden"></div>
+        <div id="GR" class="map_block hidden"></div>
+
+        <div id="Up0" class="map_block hidden"></div>
+        <div id="Up1" class="map_block hidden"></div>
+        <div id="Up2" class="map_block hidden"></div>
+        <div id="Up3" class="map_block hidden"></div>
+        <div id="Up4" class="map_block hidden"></div>
+        <div id="Up5" class="map_block hidden"></div>
+        <div id="Up6" class="map_block hidden"></div>
+
+        <div id="Down0" class="map_block hidden"></div>
+        <div id="Down1" class="map_block hidden"></div>
+        <div id="Down2" class="map_block hidden"></div>
+        <div id="Down3" class="map_block hidden"></div>
+        <div id="Down4" class="map_block hidden"></div>
+        <div id="Down5" class="map_block hidden"></div>
+        <div id="Down6" class="map_block hidden"></div>
+    </div>
+
+<div id="game_window">
+    <div id="platform">
+        <div id="A0" class="map_block"></div>
+        <div id="A1" class="map_block"></div>
+        <div id="A2" class="map_block"></div>
+        <div id="A3" class="map_block"></div>
+        <div id="A4" class="map_block"></div>
+        <div id="A5" class="map_block"></div>
+        <div id="A6" class="map_block"></div>
+        <div id="B0" class="map_block"></div>
+        <div id="B1" class="map_block"></div>
+        <div id="B2" class="map_block"></div>
+        <div id="B3" class="map_block"></div>
+        <div id="B4" class="map_block"></div>
+        <div id="B5" class="map_block"></div>
+        <div id="B6" class="map_block"></div>
+        <div id="C0" class="map_block"></div>
+        <div id="C1" class="map_block"></div>
+        <div id="C2" class="map_block"></div>
+        <div id="C3" class="map_block"></div>
+        <div id="C4" class="map_block"></div>
+        <div id="C5" class="map_block"></div>
+        <div id="C6" class="map_block"></div>
+        <div id="D0" class="map_block"></div>
+        <div id="D1" class="map_block"></div>
+        <div id="D2" class="map_block"></div>
+        <div id="D3" class="map_block">
+            <img id="robot" src="img/RobotKACEK.png">
+        </div>
+        <div id="D4" class="map_block"></div>
+        <div id="D5" class="map_block"></div>
+        <div id="D6" class="map_block"></div>
+        <div id="E0" class="map_block"></div>
+        <div id="E1" class="map_block"></div>
+        <div id="E2" class="map_block"></div>
+        <div id="E3" class="map_block"></div>
+        <div id="E4" class="map_block"></div>
+        <div id="E5" class="map_block"></div>
+        <div id="E6" class="map_block"></div>
+        <div id="F0" class="map_block"></div>
+        <div id="F1" class="map_block"></div>
+        <div id="F2" class="map_block"></div>
+        <div id="F3" class="map_block"></div>
+        <div id="F4" class="map_block"></div>
+        <div id="F5" class="map_block"></div>
+        <div id="F6" class="map_block"></div>
+        <div id="G0" class="map_block"></div>
+        <div id="G1" class="map_block"></div>
+        <div id="G2" class="map_block"></div>
+        <div id="G3" class="map_block"></div>
+        <div id="G4" class="map_block"></div>
+        <div id="G5" class="map_block"></div>
+        <div id="G6" class="map_block"></div>
+
+    </div>
+    <div id="right_space">
+        <div id="menu">
+            <button id="restart_game" type="button">Restart game</button>
+        </div>
+        <div id="energy"></div>
+        <div id="ship_progress"></div>
+        <textarea readonly rows="4" cols="50" id="text_field"></textarea>
+        <input id="text_commands" type="text" name="text_commands" size="46" autofocus="autofocus">
+        <button id="send_command" type="button">Send</button>
+    </div>
+</div>
+</body>
+</html>
