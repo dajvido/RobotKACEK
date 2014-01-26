@@ -1,3 +1,4 @@
+var objects = [['barylka', '4-4'], ['diament', '10-8'], ['gwiazda', '5-5'], ['krzem', '8-5'], ['laser', '5-9'], ['magma', '10-11'], ['stal', '11-11'], ['tabularsa', '6-6']];
 // for (var j=0; j<21; j++)
 // {
 //     for (var k=0; k<21; k++)
@@ -5,6 +6,17 @@
 //         $('#robot').attr("src", "/img/map/" + j + "-" + k + ".png");
 //     }
 // }
+function set_objects() {
+    var position_zero = $('#A0').text(),
+        position_x = position_zero.split('-')[0],
+        position_y = position_zero.split('-')[1];
+    for (var i=0; i<objects.length; i++) {
+        for (var j=1; j<objects[i].length; j++) {
+            var object_position = objects[i][j];
+            //#TODO: if (position_x >)
+        }
+    }
+};
  $(document).ready(function(){
     var tx=[], t=[];
     for (var y=0; y<21; y++)

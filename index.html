@@ -6,42 +6,9 @@
     <script type="text/javascript" src="js/jquery-cookie-master/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/textprocessor.js"></script>
     <script type="text/javascript" src="js/text_handler.js"></script>
+    <title>Robot Kacek</title>
 </head>
 <body>
-    <div id="hidden_platform" class="hidden">
-        <div id="AL" class="map_block hidden"></div>
-        <div id="BL" class="map_block hidden"></div>
-        <div id="CL" class="map_block hidden"></div>
-        <div id="DL" class="map_block hidden"></div>
-        <div id="EL" class="map_block hidden"></div>
-        <div id="FL" class="map_block hidden"></div>
-        <div id="GL" class="map_block hidden"></div>
-
-        <div id="AR" class="map_block hidden"></div>
-        <div id="BR" class="map_block hidden"></div>
-        <div id="CR" class="map_block hidden"></div>
-        <div id="DR" class="map_block hidden"></div>
-        <div id="ER" class="map_block hidden"></div>
-        <div id="FR" class="map_block hidden"></div>
-        <div id="GR" class="map_block hidden"></div>
-
-        <div id="Up0" class="map_block hidden"></div>
-        <div id="Up1" class="map_block hidden"></div>
-        <div id="Up2" class="map_block hidden"></div>
-        <div id="Up3" class="map_block hidden"></div>
-        <div id="Up4" class="map_block hidden"></div>
-        <div id="Up5" class="map_block hidden"></div>
-        <div id="Up6" class="map_block hidden"></div>
-
-        <div id="Down0" class="map_block hidden"></div>
-        <div id="Down1" class="map_block hidden"></div>
-        <div id="Down2" class="map_block hidden"></div>
-        <div id="Down3" class="map_block hidden"></div>
-        <div id="Down4" class="map_block hidden"></div>
-        <div id="Down5" class="map_block hidden"></div>
-        <div id="Down6" class="map_block hidden"></div>
-    </div>
-
 <div id="game_window">
     <div id="platform">
         <div id="A0" class="map_block"></div>
@@ -102,7 +69,9 @@
             <button id="restart_game" type="button">Restart game</button>
         </div>
         <div id="energy"></div>
-        <div id="ship_progress"></div>
+        <div id="ship_progress">
+            <img id="ship_image" src="img/ship/9.png">
+        </div>
         <textarea readonly rows="4" cols="50" id="text_field"></textarea>
         <input id="text_commands" type="text" name="text_commands" size="46" autofocus="autofocus">
         <button id="send_command" type="button">Send</button>

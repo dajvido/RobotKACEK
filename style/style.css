@@ -1,10 +1,18 @@
-html, body {
-    background-color: white;
+﻿body {
+    background-color:ThreeDLightShadow;
+    background-image: url(../img/dirty-metal-surface.jpg);
+    background-repeat:no-repeat;
+    background-size: 100% auto;
+}
+html{background-repeat: round;
+    background-color: rgb(211,188,143);
+    background-image: url(../img/texturedMetal.jpg);
 }
 #game_window {
     width: 1024px;
     height: 620px;
-    background-color: gray;
+    background: #E0FFFF;
+    margin: 0 auto;
 }
 #platform {
     float: left;
@@ -12,6 +20,11 @@ html, body {
     width: 595px;
     height: 595px;
     background-color: black;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow:#222222 10px 0 20px 5px;
 }
 .map_block {
     height: 85px;
@@ -23,29 +36,49 @@ html, body {
     margin-top: 13px;
     margin-right: 13px;
     width: 380px;
-    background-color: white;
+    background-color: rgb(220, 240, 240);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow:#222222 10px 0 20px 5px;
 }
 #menu {
     width: 378px;
     height: 25px;
     border: 1px;
-    border-style: solid;
-    background-color: rgb(158, 155, 155);
+    border-color: rgb(138, 183, 197);
+    background-color: rgb(158, 203, 217);
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    box-shadow:#222222 10px 0 20px 5px;
 }
 #restart_game {
     float: right;
+    box-shadow:#222222 10px 0 20px 5px;
 }
 #energy {
     float: right;
     width: 380px;
     height: 36px;
-    background-color: blue;
+    background-color: rgb(128, 163, 187);
+    box-shadow:#222222 10px 0 20px 5px;
 }
 #ship_progress {
     float: right;
     width: 380px;
     height: 200px;
-    background-color: white;
+    background-image: url(../img/cockpit.jpg);
+    background-repeat:no-repeat;
+    background-size: 380px 200px;
+}
+#ship_image {
+    width: 295px;
+    margin: 10px;
+    padding-left: 30px;
 }
 #text_field {
     float: right;
@@ -53,7 +86,7 @@ html, body {
     margin-left: 5px;
     width: 364px;
     height: 300px;
-    background-color: yellow;
+    background-color: #E0FFFF;
 }
 #text_commands {
     float: left;

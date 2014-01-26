@@ -18,10 +18,13 @@
 		//text=text.join(",");
 		//text=text.split("oraz");
 		//text=text.join(",");
-		while(text!=text.replace(".",",")){text=text.replace(".",",");};
+		// while(text!=text.replace(".",",")){text=text.replace(".",",");};
+		text=text.split(".").join(",");
 		//document.write(text);
-		while(text!=text.replace("oraz",",")){text=text.replace("oraz",",");};
-		while(text!=text.replace(" i ",",")){text=text.replace(" i ",",");};
+		// while(text!=text.replace("oraz",",")){text=text.replace("oraz",",");};
+		text=text.split("oraz").join(",");
+		// while(text!=text.replace(" i ",",")){text=text.replace(" i ",",");};
+		text=text.split(" i ").join(",");
 		var atomsentence=text.split(",");
 		//document.write(text);
 		//document.write(atomsentence[3]);
