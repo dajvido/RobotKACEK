@@ -1,4 +1,4 @@
-var objects = [['barylka', '4-4'], ['diament', '10-8'], ['gwiazda', '5-5'], ['krzem', '8-5'], ['laser', '5-9'], ['magma', '10-11'], ['stal', '11-11'], ['tabularsa', '6-6']];
+var objects = [['barylka', 4, 4], ['diament', 10, 8], ['gwiazda', 5, 5], ['krzem', 8, 5], ['laser', 5, 9], ['magma', 10, 11], ['stal', 11, 11], ['tabularsa', 6, 6]];
 // for (var j=0; j<21; j++)
 // {
 //     for (var k=0; k<21; k++)
@@ -6,17 +6,99 @@ var objects = [['barylka', '4-4'], ['diament', '10-8'], ['gwiazda', '5-5'], ['kr
 //         $('#robot').attr("src", "/img/map/" + j + "-" + k + ".png");
 //     }
 // }
+var plecak = [];//['barylka', 'magma', 'tabularasa', 'krzem', 'stal', 'laser', 'diament', 'gwiazda'];
+function dodaj_do_plecaka() {
+    plecak.push($('#D3').attr('data-info'));
+    // objects.splice(objects.indexOf([$('#D3').attr('data-info')]))
+    for (var i=0; i<objects.length; i++) {
+        if (objects[i][0] == $('#D3').attr('data-info')) {
+            objects.splice(i, 1);
+        }
+    }
+    $('#D3').find('.object').remove();
+    $('#D3').attr('data-info', '');
+}
+function wyswietl_plecak() {
+    if (plecak.length) {
+        return 'W plecaku mam: ' + plecak.toString();
+    }
+    else {
+        return 'Pusto tu!';
+    }
+}
+function montuj() {
+    var ship_progress = $('#ship_progress').attr('data-progress');
+    if (ship_progress == '0') {
+        if (plecak.indexOf('barylka') != -1 && plecak.indexOf('magma') != -1 && plecak.indexOf('tabularasa') != -1)//barylka, magma, tabularasa
+        {
+            $('#ship_progress').attr('data-progress', '3');
+            $('#ship_image').attr('src', "img/ship/3.png");
+            plecak.splice(plecak.indexOf('barylka'), 1);
+            plecak.splice(plecak.indexOf('magma'), 1);
+            plecak.splice(plecak.indexOf('tabularasa'), 1);
+            return "Hura! Powolutku do przodu!";
+        }
+        else {
+            return "Czegos mi tutaj brakuje.";
+        }
+    }
+    else if (ship_progress == '3') {
+        //krzem, stal, laser
+        if (plecak.indexOf('krzem') != -1 && plecak.indexOf('stal') != -1 && plecak.indexOf('laser') != -1)
+        {
+            $('#ship_progress').attr('data-progress', '6');
+            $('#ship_image').attr('src', "img/ship/6.png");
+            plecak.splice(plecak.indexOf('krzem'), 1);
+            plecak.splice(plecak.indexOf('stal'), 1);
+            plecak.splice(plecak.indexOf('laser'), 1);
+            return "No juz calkiem, calkiem.";
+        }
+        else {
+            return "Czegos mi tutaj brakuje.";
+        }
+    }
+    else {
+        //diament, gwiazda
+        if (plecak.indexOf('diament') != -1 && plecak.indexOf('gwiazda') != -1)
+        {
+            $('#ship_progress').attr('data-progress', '9');
+            $('#ship_image').attr('src', "img/ship/9.png");
+            plecak.splice(plecak.indexOf('diament'), 1);
+            plecak.splice(plecak.indexOf('gwiazda'), 1);
+            return "Skonczone! Mozna odlatywac!";
+        }
+        else {
+            return "Czegos mi tutaj brakuje.";
+        }
+    }
+}
 function set_objects() {
-    var position_zero = $('#A0').text(),
+    $('.object').parent().attr('data-info', '');
+    $('.object').remove();
+    var position_zero = $('#A0').attr('data-position'),
         position_x = position_zero.split('-')[0],
         position_y = position_zero.split('-')[1];
     for (var i=0; i<objects.length; i++) {
-        for (var j=1; j<objects[i].length; j++) {
-            var object_position = objects[i][j];
-            //#TODO: if (position_x >)
+        // for (var j=1; j<objects[i].length; j++) {
+        //     var object_position = objects[i][j];
+        //     //#TODO: if (position_x >)
+
+        // }
+        if (objects[i][1] >= position_x && objects[i][1] <= position_x + 6) {
+            if (objects[i][2] >= position_y && objects[i][2] <= position_y + 6) {
+                $('div[data-position="' + objects[i][1] + '-' + objects[i][2] + '"]').attr('data-info', objects[i][0]);
+                if ($('div[data-position="' + objects[i][1] + '-' + objects[i][2] + '"]').attr('id') == 'D3') {
+                    $('div[data-position="' + objects[i][1] + '-' + objects[i][2] + '"]').html('<img id="robot" src="img/RobotKACEK.png"><img class="object" src="img/materials/' + objects[i][0] + '.png">');
+                } else {
+                    $('div[data-position="' + objects[i][1] + '-' + objects[i][2] + '"]').html('<img class="object" src="img/materials/' + objects[i][0] + '.png">');
+                }
+            }
         }
     }
 };
+var temp;
+var question;
+var message;
  $(document).ready(function(){
     var tx=[], t=[];
     for (var y=0; y<21; y++)
@@ -28,6 +110,7 @@ function set_objects() {
         t[y] = tx;
         tx = [];
     }
+    {
     // for (var i=0; i<7; i++)
     // {
     //     for (var j=0; j<21; j++)
@@ -46,6 +129,7 @@ function set_objects() {
     // }
     // if ($.cookie('all_commands') == "")
     // {
+    }
         /* LEFT side of platform */
         $('#AL').css("background-image", "url('../img/map/7-6.png')");
         $('#BL').css("background-image", "url('../img/map/8-6.png')");
@@ -94,63 +178,111 @@ function set_objects() {
             $('#G' + i).attr('data-position', '13-' + (i + 7));
         }
     // }
+    var specyfy=false;
+    set_objects();
     $('#send_command').click(function() {
         var command = $('#text_commands').val();
         if (command !== "")
         {
-            var message = '';
-            var temp=textprocess(command);
-            // debugger;
-            for (var k=0; k<temp.length; k++)
+            if(specyfy==false)//jesli nie jest w trybie uscislania
             {
-                for (var i=0; i<listofcomand.length; i++)
+                message = '';
+                temp=textprocess(command);
+                question = '';
+                k=0
+            }
+            else//jesli uscisla - czyli odpowiada na pytanie o argument do funkcji
+            {
+                command=command.toLowerCase();
+                if(command.match("nie")!=null||command.match("nic")!=null||command.match("nigdzie")!=null)
                 {
-                    for (var j=0; j<listofcomand[i].length;j++)
+                    message="";
+                    k++;
+                }
+                else{
+                    temp[k].arg=getarg(command);
+                    //specyfy=false;
+                    message="";
+                }
+            }
+            for (;;k++)
+            {
+                if(k==temp.length)
+                {
+
+                    specyfy=false;
+                    break;
+                }
+                //message+='\n'+temp[k].main+" "+temp[k].arg;
+                if(match(temp[k].main,temp[k].arg))// ----------------czy funkcja i argument pasują do siebie (np. idz w gwiazde nie dziala)
+                    question+=listoffutureverbs[temp[k].main]+listofarg[temp[k].arg][0]+",";//jesli pasuja zapisujemy je do pytania (przyda sie ja nie beda pasowac)
+                else
+                {
+                    specyfy=true; //jak nie pasuja schodzimy w tryb uscislania
+                    var add="";
+                    if(question!="")
+                        add=" pozniej";
+                    message='\n'+"Okey, "+question+"ale "+listofinfinitives[temp[k].main]+add+"?";//pisze co zrobil do tej pory i pyta co zrobic dalej
+                    break;
+                }
+                var i=temp[k].main;
+                //for (var i=0; i<listofcomand.length; i++)
+                {
+                    //for (var j=0; j<listofcomand[i].length;j++)
                     {
-                        if (listofcomand[i][j].indexOf(temp[k].main) != -1)
+                  //      if (listofcomand[i][j].indexOf(temp[k].main) != -1)
                         {
                             // jeżeli każemy mu iść (iść jest na 0)
                             if (i == 0)
                             {
-                                for (var l=0; l<listofarg.length; l++)
-                                {
-                                    if (listofarg[l].indexOf(temp[k].arg[0]) != -1)
-                                    {
-                                        what_way = l;
-                                    }
-                                }
+                                //for (var l=0; l<listofarg.length; l++)
+                                //{
+                                  //  if (listofarg[l].indexOf(temp[k].arg[0]) != -1)
+                                    //{
+                                      //  what_way = l;
+                                    //}
+                                //}
+                                var what_way=temp[k].arg;
                                 if (what_way == 0)
                                 {
-                                    message = go_up();
+                                    message += go_up();
                                 }
                                 else if (what_way == 1)
                                 {
-                                    message = go_down();
+                                    message += go_down();
                                 }
                                 else if (what_way == 2)
                                 {
-                                    message = go_left();
+                                    message += go_left();
                                 }
                                 else if (what_way == 3)
                                 {
-                                    message = go_right();
+                                    message += go_right();
                                 }
-                                // if (temp[k].arg[0] == 'gore')
-                                // {
-                                //     message = go_up();
-                                // }
-                                // else if (temp[k].arg[0] == 'dol')
-                                // {
-                                //     message = go_down();
-                                // }
-                                // else if (temp[k].arg[0] == 'lewo')
-                                // {
-                                //     message = go_left();
-                                // }
-                                // else if (temp[k].arg[0] == 'prawo')
-                                // {
-                                //     message = go_right();
-                                // }
+                            }
+                            //jeżeli każemy mu montować
+                            if (i == 3) {
+                                message += '\n' + montuj();
+                            }
+                            // jeżeli każemy mu podnieść (podnoszenie jest na 6)
+                            if (i == 6) {
+                                if (listofarg[temp[k].arg].indexOf($('#D3').attr('data-info')) != -1)
+                                {
+                                    dodaj_do_plecaka();
+                                } else {
+                                    message += '\nCo ja mam podniesc?';
+                                    if ($('#D3').attr('data-info'))
+                                    {
+                                         message += ' Widze tutaj ' + $('#D3').attr('data-info');
+                                    }
+                                    else {
+                                        message += ' Nie widze nic "podnoszalnego".'
+                                    }
+                                }
+                            }
+                            // jeżeli każemy wyświetlić plecak
+                            if (i == 10) {
+                                message += ('\n' + wyswietl_plecak());
                             }
                         }
                     }
@@ -220,6 +352,7 @@ function set_objects() {
                 $('#G' + i).css("background-image", "url('../img/map/" + (parseInt(y, 10) + 5) + "-"+ (parseInt(x, 10) + parseInt(i, 10)) + ".png')");
                 $('#G' + i).attr('data-position', (parseInt(y, 10) + 5) + "-" + (parseInt(x, 10) + parseInt(i, 10)));
             }
+            set_objects();
             return '';
         }
         else
@@ -254,6 +387,7 @@ function set_objects() {
                 $('#G' + i).css("background-image", "url('../img/map/" + (parseInt(y, 10) + 1) + "-"+ (parseInt(x, 10) + parseInt(i, 10)) + ".png')");
                 $('#G' + i).attr('data-position', (parseInt(y, 10) + 1) + "-" + (parseInt(x, 10) + parseInt(i, 10)));
             }
+            set_objects();
             return '';
         }
         else
@@ -291,6 +425,7 @@ function set_objects() {
                 $('#G' + i).css("background-image", "url('../img/map/" + (parseInt(y, 10) + 6) + "-"+ (parseInt(x, 10) + parseInt(i, 10) - 1) + ".png')");
                 $('#G' + i).attr('data-position', (parseInt(y, 10) + 6) + "-" + (parseInt(x, 10) + parseInt(i, 10) - 1));
             }
+            set_objects();
             return '';
         }
         else
@@ -328,12 +463,17 @@ function set_objects() {
                 $('#G' + i).css("background-image", "url('../img/map/" + (parseInt(y, 10) + 6) + "-"+ (parseInt(x, 10) + parseInt(i, 10) + 1) + ".png')");
                 $('#G' + i).attr('data-position', (parseInt(y, 10) + 6) + "-" + (parseInt(x, 10) + parseInt(i, 10) + 1));
             }
+            set_objects();
             return '';
         }
         else
         {
             return '\nOjojoj za bardzo prawo';
         }
+    }
+    function match(mainnumber,argnumber)
+    {
+        return !(argnumber==null);
     }
 });
 $(document).keypress(function(e) {
