@@ -1,14 +1,7 @@
-var objects = [['barylka', 4, 4], ['diament', 10, 8], ['gwiazda', 5, 5], ['krzem', 8, 5], ['laser', 5, 9], ['magma', 10, 11], ['stal', 11, 11], ['tabularsa', 6, 6]];
-// for (var j=0; j<21; j++)
-// {
-//     for (var k=0; k<21; k++)
-//     {
-//         $('#robot').attr("src", "/img/map/" + j + "-" + k + ".png");
-//     }
-// }
-var plecak = [];//['barylka', 'magma', 'tabularasa', 'krzem', 'stal', 'laser', 'diament', 'gwiazda'];
-function dodaj_do_plecaka() {
-    plecak.push($('#D3').attr('data-info'));
+var objects = [['barylka', 4, 4], ['diament', 10, 8], ['gwiazda', 5, 5], ['krzem', 8, 5], ['laser', 5, 9], ['magma', 10, 11], ['stal', 11, 11], ['plytka', 6, 6]];
+var plecak = ['baryłkę', 'magmę', 'płytkę', 'krzem', 'stal', 'laser', 'diament', 'gwiazdę'];
+function dodaj_do_plecaka(item) {
+    plecak.push(item);
     // objects.splice(objects.indexOf([$('#D3').attr('data-info')]))
     for (var i=0; i<objects.length; i++) {
         if (objects[i][0] == $('#D3').attr('data-info')) {
@@ -26,16 +19,19 @@ function wyswietl_plecak() {
         return 'Pusto tu!';
     }
 }
+// function co_jest_na(arg) {
+//     debugger;
+// }
 function montuj() {
     var ship_progress = $('#ship_progress').attr('data-progress');
     if (ship_progress == '0') {
-        if (plecak.indexOf('barylka') != -1 && plecak.indexOf('magma') != -1 && plecak.indexOf('tabularasa') != -1)//barylka, magma, tabularasa
+        if (plecak.indexOf('baryłkę') != -1 && plecak.indexOf('magmę') != -1 && plecak.indexOf('płytkę') != -1)//barylka, magma, tabularasa
         {
             $('#ship_progress').attr('data-progress', '3');
             $('#ship_image').attr('src', "img/ship/3.png");
-            plecak.splice(plecak.indexOf('barylka'), 1);
-            plecak.splice(plecak.indexOf('magma'), 1);
-            plecak.splice(plecak.indexOf('tabularasa'), 1);
+            plecak.splice(plecak.indexOf('baryłkę'), 1);
+            plecak.splice(plecak.indexOf('magmę'), 1);
+            plecak.splice(plecak.indexOf('płytkę'), 1);
             return "Hura! Powolutku do przodu!";
         }
         else {
@@ -57,19 +53,22 @@ function montuj() {
             return "Czegos mi tutaj brakuje.";
         }
     }
-    else {
+    else if (ship_progress == '6')  {
         //diament, gwiazda
-        if (plecak.indexOf('diament') != -1 && plecak.indexOf('gwiazda') != -1)
+        if (plecak.indexOf('diament') != -1 && plecak.indexOf('gwiazdę') != -1)
         {
             $('#ship_progress').attr('data-progress', '9');
             $('#ship_image').attr('src', "img/ship/9.png");
             plecak.splice(plecak.indexOf('diament'), 1);
-            plecak.splice(plecak.indexOf('gwiazda'), 1);
+            plecak.splice(plecak.indexOf('gwiazdę'), 1);
             return "Skonczone! Mozna odlatywac!";
         }
         else {
             return "Czegos mi tutaj brakuje.";
         }
+    }
+    else {
+        return "Nic już nie trzeba budować, po prostu wsiadać i lecieć!";
     }
 }
 function set_objects() {
@@ -96,10 +95,24 @@ function set_objects() {
         }
     }
 };
+// function away_from_keyboard() {
+//     var x = $('#text_field').val().split(': '),
+//         last_command_time = x[x.length-2].split('[')[1].replace(']','').split(':'),
+//         currentTime = new Date(),
+//         hours = currentTime.getHours(),
+//         minutes = currentTime.getMinutes();
+//         if (minutes < 10)
+//         {
+//             minutes = "0" + minutes;
+//         }
+//         if (hours == last_command_time[0]) {
+//             if (minutes >= )
+//         }
+// };
 var temp;
 var question;
 var message;
- $(document).ready(function(){
+$(document).ready(function(){
     var tx=[], t=[];
     for (var y=0; y<21; y++)
     {
@@ -202,36 +215,40 @@ var message;
                 else{
                     temp[k].arg=getarg(command);
                     //specyfy=false;
-                    message="";
+                    //message="";
                 }
             }
             for (;;k++)
             {
                 if(k==temp.length)
                 {
-
+                   // message="";
                     specyfy=false;
                     break;
                 }
                 //message+='\n'+temp[k].main+" "+temp[k].arg;
                 if(match(temp[k].main,temp[k].arg))// ----------------czy funkcja i argument pasują do siebie (np. idz w gwiazde nie dziala)
-                    question+=listoffutureverbs[temp[k].main]+listofarg[temp[k].arg][0]+",";//jesli pasuja zapisujemy je do pytania (przyda sie ja nie beda pasowac)
+                   {  if(listofarg[temp[k].arg]!=null)
+                        question+=listoffutureverbs[temp[k].main]+listofarg[temp[k].arg][0]+",";//jesli pasuja zapisujemy je do pytania (przyda sie ja nie beda pasowac)
+                    else
+                        question+=listoffutureverbs[temp[k].main]+",";
+                }
                 else
                 {
                     specyfy=true; //jak nie pasuja schodzimy w tryb uscislania
                     var add="";
                     if(question!="")
-                        add=" pozniej";
-                    message='\n'+"Okey, "+question+"ale "+listofinfinitives[temp[k].main]+add+"?";//pisze co zrobil do tej pory i pyta co zrobic dalej
+                        add="pózniej";
+                    message+='\n'+"Okey, "+question+"ale "+listofinfinitives[temp[k].main]+add+"?";//pisze co zrobil do tej pory i pyta co zrobic dalej
                     break;
                 }
                 var i=temp[k].main;
-                //for (var i=0; i<listofcomand.length; i++)
-                {
-                    //for (var j=0; j<listofcomand[i].length;j++)
-                    {
-                  //      if (listofcomand[i][j].indexOf(temp[k].main) != -1)
-                        {
+                // for (var i=0; i<listofcomand.length; i++)
+                // {
+                //     for (var j=0; j<listofcomand[i].length;j++)
+                //     {
+                //        if (listofcomand[i][j].indexOf(temp[k].main) != -1)
+                //         {
                             // jeżeli każemy mu iść (iść jest na 0)
                             if (i == 0)
                             {
@@ -260,6 +277,10 @@ var message;
                                     message += go_right();
                                 }
                             }
+                            // jeżeli pytamy co jest gdzieś
+                            if (i == 1) {
+                                message += '\n' + co_jest_na(temp[k].arg);
+                            }
                             //jeżeli każemy mu montować
                             if (i == 3) {
                                 message += '\n' + montuj();
@@ -268,7 +289,8 @@ var message;
                             if (i == 6) {
                                 if (listofarg[temp[k].arg].indexOf($('#D3').attr('data-info')) != -1)
                                 {
-                                    dodaj_do_plecaka();
+                                    dodaj_do_plecaka(listofarg[temp[k].arg][0]);
+                                    message += "\nPodniosłem " + listofarg[temp[k].arg][0] + "!";
                                 } else {
                                     message += '\nCo ja mam podniesc?';
                                     if ($('#D3').attr('data-info'))
@@ -284,9 +306,11 @@ var message;
                             if (i == 10) {
                                 message += ('\n' + wyswietl_plecak());
                             }
-                        }
-                    }
-                }
+                            if(info(temp[k].main,temp[k].arg)!=null)
+                                message+='\n'+info(temp[k].main,temp[k].arg);
+                //         }
+                //     }
+                // }
             }
             var currentTime = new Date(),
                 hours = currentTime.getHours(),
@@ -310,6 +334,7 @@ var message;
                     return text + message;
                 });
             }
+            message="";
             $('#text_commands').focus();
             $('#text_field').scrollTop($('#text_field')[0].scrollHeight);
 
@@ -473,8 +498,51 @@ var message;
     }
     function match(mainnumber,argnumber)
     {
-        return !(argnumber==null);
+        //return (argnumber!=null);
+        if((mainnumber==0||mainnumber==1)&&argnumber>=0&&argnumber<=3)
+            return true;
+        if(mainnumber>=7&&mainnumber<=9&&argnumber==null)
+            return true;
+        if((mainnumber==2||(mainnumber>=4&&mainnumber<=6))&&((argnumber>=4&&argnumber<=15)||argnumber==16))
+            return true;
+        if(mainnumber==3&&(argnumber>=12&&argnumber<=14))
+            return true;
+        if(mainnumber==10&&argnumber==15)
+            return true;
+        return false;
     }
+        function info(mainnumber,argnumber)
+    {
+        if(mainnumber==8&&argnumber==null)
+        {
+            return "Hej, jestem Robot Kacek. Rozbiłem się na obcej planecie. Pomóż mi się wydostać Muszę zbudować od nowa mój statek dzięki surowcom na tej planecie. Oto składniki potrzebne do zbudowania statku:baryłka, magma, tabularasa dla pierwszej części krzem, stal i laser dla kolejnego elementu na końcu by odlecieć musisz znalesc diament i złotą gwiazdę. Mów mi w którą stronę mam iść, co podnieść by zbudować dany element. Powodzenia!";
+        }
+        if(mainnumber==2&&argnumber>=4&&argnumber<=6)
+            return "Część do stworzenia pierwszego elementu, jest to podstawowy surowiec. Znajdziesz go na planecie.";
+        if(mainnumber==2&&argnumber>=7&&argnumber<=8)
+            return"Część do stworzenia drugiego elementu, która musi być gdzieś w okolicy.";
+        if(mainnumber==2&&argnumber>=9&&argnumber<=11)
+            return "Część do stworzenia ostatniego elementu, jest to końcowa część statku.";
+        if(mainnumber==2&&argnumber==12)
+            return "Pierwsza część statku, do jej zbudowania potrzebne są: baryłka, magma, tabularasa.";
+        if(mainnumber==2&&argnumber==13)
+            return "Druga część statku, do jej zbudowania potrzebne są: krzem, stal, laser.";
+        if(mainnumber==2&&argnumber==14)
+            return "Ostatnia część statku, do jej zbudowania potrzebne są: diament, złota gwiazda.";
+        if(mainnumber==2&&argnumber==16)
+            return "Statek jest potrzebny bym odleciał i zakończył grę. Aby go zbudować muszę zmontować podwozie, nadwozie i kabine";
+        if(mainnumber==4&&(argnumber>=4&&argnumber<=15))
+            return "Nie wiem jak dojść do "+listofarg[argnumber][1]+". Podczas lądowania zepsuł się mój moduł algorytmiczny.";
+        if(mainnumber==5&&(argnumber>=4&&argnumber<=15))
+            return "Nie wiem jak daleko do "+listofarg[argnumber][1]+". Podczas lądowania zepsuł się mój kalkulator pokładkowy.";
+        if(mainnumber==7)
+            if($('#ship_progress').attr('data-progress')==9)//sprawdzanie staku??????????????????????????????????????????????????????????????????????????
+                return "Odlatuje, pa,pa";///dodaj sprawdzanie staku
+            else
+                return "Nie moge odleciec, statek nie jest skończony!";
+        if(mainnumber==9)
+            return "Musze zbudować statek, pomóż mi!";
+        }
 });
 $(document).keypress(function(e) {
     if(e.which == 13) {
